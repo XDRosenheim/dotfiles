@@ -1,0 +1,3 @@
+# It's simple.
+# Pipe the output from fortune into cowsay.
+fortune | cowsay
