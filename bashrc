@@ -28,5 +28,9 @@ fi
 
 # Git-completion
 if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+	. ~/.git-completion.bash
+fi
+
+if [ -f ~/Dotfiles/cowsayFortune ]; then
+	. ~/Dotfiles/cowsayFortune
 fi

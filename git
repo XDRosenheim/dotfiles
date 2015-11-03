@@ -1,2 +1,3 @@
 git config --global user.email "patrickrosenheim@gmail.com"
 git config --global user.name "XDRosenheim_Server"
+git config --global push.default matching
