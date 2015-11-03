@@ -1,6 +1,6 @@
 alias html='cd /var/www/html; l'
 alias please='sudo $(history -p !-1)'
-alias maze='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 8 ))m/" || echo -n \\; sleep .02; done'
+
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -8,4 +8,16 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
+
 alias apt-get='sudo apt-get'
+
+alias maze2='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 2 ))m\\" || echo -n \\; sleep .02; done'
+alias maze3='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 3 ))m\\" || echo -n \\; sleep .02; done'
+alias maze4='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 4 ))m\\" || echo -n \\; sleep .02; done'
+alias maze5='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 5 ))m\\" || echo -n \\; sleep .02; done'
+alias maze6='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 6 ))m\\" || echo -n \\; sleep .02; done'
+alias maze7='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 7 ))m\\" || echo -n \\; sleep .02; done'
+alias maze8='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 8 ))m\\" || echo -n \\; sleep .02; done'
+
+alias ll='ls -lA'
+alias l='ls -A'
