@@ -49,45 +49,27 @@ set_prompt () {
 ############################################
 
 	# Add a bright white exit status for the last command
-	PS1+="\[$bldwht\]$? "
+	PS1+="┌\[$bldwht\]$?─"
 
 	# If it was successful, print a green check mark. Otherwise, print a red X.
 	if [[ $last_command == 0 ]]; then
-		PS1+="\[$txtgrn\]$checkmark "
+		PS1+="(\[$txtgrn\]$checkmark\[$bldwht\])─"
 	else
-		PS1+="\[$txtred\]$fancyX "
+		PS1+="(\[$txtred\]$fancyX\[$bldwht\])─"
 	fi
 
 	# If root, just print the host in red. Otherwise, print the current user and host in green.
 	if [[ $EUID == 0 ]]; then
 		PS1+="\[\e[04;31m\]\h "
 	else
-		PS1+="\[$undgrn\]\u\[$txtrst\]\[$txtred\]@\[$txtylw\]\h$txtrst "
+		PS1+="(\[$txtrst\]\[$undgrn\]\u\[$txtrst\]\[$bldwht\])─(\[$txtrst\]\[$txtylw\]\h$txtrst$bldwht)─(\[$txtrst\]\[$txtcyn\]$(date "+%H:%M %a %d %b")\[$bldwht\])─("
 	fi
 
     # Show the git branch if there is any.
-	PS1+="\[$txtrst\]\[$undpur\]$(__git_ps1)\[$txtrst\]"
+	PS1+="\[$txtrst\]\[$txtpur\]$(__git_ps1)\[$txtrst\]\[$bldwht\])"
 
 	# Print the working directory and prompt marker in blue, and reset the text color to the default.
-	PS1+="\[$bldblu\] \w \$\[$txtrst\] "
+	PS1+="\n└─(\[$bldblu\]\w\[$bldwht\])>\[$txtrst\] "
 }
-
-#function git_color {
-#	local git_status="$(git status 2> /dev/null)"
-#	local RED="\033[0;31m"
-#	local GREEN="\033[0;32m"
-#	local YELLOW="\033[0;33m"
-#	local OCHRE="\033[38;5;95m"
-#
-#	if [[ ! $git_status =~ "working directory clean" ]]; then
-#		echo -e $RED
-#	elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-#		echo -e $YELLOW
-#	elif [[ $git_status =~ "nothing to commit" ]]; then
-#		echo -e $GREEN
-#	elif
-#		echo -e $OCHRE
-#	fi
-#}
 
 PROMPT_COMMAND='set_prompt'
