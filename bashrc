@@ -34,3 +34,11 @@ fi
 if [ -f ~/Dotfiles/cowsayFortune ]; then
 	. ~/Dotfiles/cowsayFortune
 fi
+
+if [ -f ~/Dotfiles/functions ]; then
+    . ~/Dotfiles/functions
+fi
+
+if [ -f ~/Dotfiles/manpages ]; then
+    . ~/Dotfiles/manpages
+fi

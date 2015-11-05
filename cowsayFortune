@@ -1,3 +1,4 @@
 # It's simple.
 # Pipe the output from fortune into cowsay.
+# Bonus: Use a random cow!
 fortune | cowsay -f $(ls /usr/share/cowsay/cows/ | shuf -n1)

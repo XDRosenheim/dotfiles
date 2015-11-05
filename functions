@@ -1,0 +1,15 @@
+function row
+{
+	local COL
+	local ROW
+	IFS=';' read -sdR -p $'\E[6n' ROW COL
+	return "${ROW#*[}"
+}
+
+function col
+{
+	local COL
+	local ROW
+	IFS=';' read -sdR -p $'\E[6n' ROW COL
+	echo "${COL}"
+}
