@@ -46,70 +46,64 @@ set_prompt () {
 ##### Bold Underline
 	local bldundblu='\[\e[1;4;34m\]' # Blue
 ############################################
-	local leader='─'
-	local starter='┤'
-	local ender='├'
 ##### Stuff ### Change these ###############
-	local successsymbol=█		# Code for a successsymbol #'\342\234\223' is a check mark
-	local errorsymbol=█			# Code for an errorsymbol #'\342\234\227' is a cross
-	local mainColor=$bldwht		# Main color is the color of the lines and parentheses
-	local dirColor=$bldundblu	# Color of current directory
+	local connector='─'				# Placed between ender and starter
+	local starter='┤'				# Placed before stuff
+	local ender='├'					# Placed after stuff
+	local errorsymbol=█				# Code for an errorsymbol #'\342\234\227' is a cross
+	local mainColor=$bldwht			# Main color is the color of the lines and parentheses
+	local dirColor=$bldundblu		# Color of current directory
+	local fileCountColor=$txtylw	# COlor of file counter
+	local dirCountColor=$txtylw		# Color of dir counter
 ############################################
 
-	# If the last command was successfull, print the "success-symbol".
 	if [[ $last_command == 0 ]]; then
-		PS1+="$mainColor┌$leader$starter$txtgrn$successsymbol$mainColor$ender$leader"
+		PS1+="$mainColor┌$connector"
 	else
-		PS1+="$mainColor┌$leader$starter$last_command$txtrst$ender$leader$starter$txtred$errorsymbol$mainColor$ender$leader"
+		PS1+="$mainColor┌$connector$starter$last_command$txtrst$ender$connector$starter$txtred$errorsymbol$mainColor$ender$connector"
 	fi
 
-	# If root, just print the host in red. Otherwise, print the current user and host in green.
 	if [[ $EUID != 0 ]]; then
-		# Hostname
+		# Logged in as root
 		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
-		# Leader
-		PS1+=$leader
-		# Date
+		PS1+=$connector
 		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
 	else
-		# Username
+		# Logged in as a user
 		PS1+="$mainColor$starter$txtrst$undgrn\u$txtrst$mainColor$ender"
-		# Leader
-		PS1+=$leader
-		# Hostname
+		PS1+=$connector
 		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
-		# Leader
-		PS1+=$leader
-		# Date
+		PS1+=$connector
 		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
 	fi
 
-    # Show the git branch if there is any.
-	# Leader
-	#PS1+=$leader
-	# Show git branch for working directory
+	# Show git branch
+	# Comented by default. It's ugly.
+	#PS1+=$connector
 	#PS1+="$starter$txtrst$txtpur$(__git_ps1)$mainColor$ender"
 
-	PS1+=$leader
+	# Show pwd
+	PS1+=$connector
 	PS1+="$starter$bldundblu\w$txtrst$mainColor$ender"
 
+	# If the directory you are in has files, tell us how many there are
 	files
 	if [ $GetAmountOfFiles > 0 ]; then
-		PS1+=$leader
-		PS1+=$starter$txtylw$GetAmountOfFiles
+		PS1+=$connector
+		PS1+=$starter$fileCountColor$GetAmountOfFiles
 		PS1+=' files'
 		PS1+=$txtrst$mainColor$ender
 	fi
 
+	# If the directory you are in has more directories, tell us how many there are
 	dirs
 	if [ $GetAmountOfDirs > 0 ]; then
-		PS1+=$leader
-		PS1+=$starter$txtylw$GetAmountOfDirs
+		PS1+=$connector
+		PS1+=$starter$dirCountColor$GetAmountOfDirs
 		PS1+=' directories'
-		PS1+=$txtrst$mainColor$ender$leader
+		PS1+=$txtrst$mainColor$ender
 	fi
 	
-	# New line and reset the text color to the default.
 	PS1+="\n$mainColor└►$txtrst "
 }
 
