@@ -5,9 +5,9 @@
 # My script, not your's.
 
 set_prompt () {
-local last_command=$?  # Must come first!
-# Clear it..
-PS1=""
+  local last_command=$?  # Must come first!
+  # Clear it..
+  PS1=""
 ##### Colors ###############################
 ##### Regular
   local txtblk='\[\e[0;30m\]' # Black
@@ -83,6 +83,11 @@ PS1=""
     PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
   fi
 
+  discUsageColor
+  # Show root disc usage percent
+  PS1+=$connector
+  PS1+=$starter$discusageColor$(df | grep "/dev/sda" | awk '{print $5}')$mainColor$ender
+
   # Show git branch.
   # Comented by default. It's ugly.
   #PS1+=$connector
@@ -122,4 +127,18 @@ dirs () {
   GetAmountOfDirs=$(find . -maxdepth 1 -type d | wc -w)
 }
 
+discUsageColor () {
+  local i="$(df | grep "/dev/sda" | awk '{print $5}' | tr -d '%')"
+  if [[ i -gt 90 ]]; then
+    discusageColor='\[\e[0;31m\]'
+  elif [[ i -gt 50 ]]; then
+    discusageColor='\[\e[0;33m\]'
+  elif [[ i -gt 25 ]]; then
+    discusageColor='\[\e[0;32m\]'
+  else
+    discusageColor='\[\e[0;37m\]'
+  fi
+}
+
 PROMPT_COMMAND='set_prompt'
+
