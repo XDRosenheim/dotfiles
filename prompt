@@ -1,4 +1,6 @@
-PROMPT_COMMAND='set_prompt'
+#!/bin/bash
+# ^ I know this doesn't HAS TO be here,
+# but then nano will colourize it.
 
 set_prompt () {
 	local last_command=$?  # Must come first!
@@ -58,18 +60,20 @@ set_prompt () {
 ############################################
 
 	if [[ $last_command == 0 ]]; then
+		# Start with this.
 		PS1+="$mainColor┌$connector"
 	else
+		# Unless there was an error before.
 		PS1+="$mainColor┌$connector$starter$last_command$txtrst$ender$connector$starter$txtred$errorsymbol$mainColor$ender$connector"
 	fi
 
 	if [[ $EUID != 0 ]]; then
-		# Logged in as root
+		# Logged in as root.
 		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
 		PS1+=$connector
 		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
 	else
-		# Logged in as a user
+		# Logged in as a user.
 		PS1+="$mainColor$starter$txtrst$undgrn\u$txtrst$mainColor$ender"
 		PS1+=$connector
 		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
@@ -77,16 +81,16 @@ set_prompt () {
 		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
 	fi
 
-	# Show git branch
+	# Show git branch.
 	# Comented by default. It's ugly.
 	#PS1+=$connector
 	#PS1+="$starter$txtrst$txtpur$(__git_ps1)$mainColor$ender"
 
-	# Show pwd
+	# Show pwd.
 	PS1+=$connector
 	PS1+="$starter$bldundblu\w$txtrst$mainColor$ender"
 
-	# If the directory you are in has files, tell us how many there are
+	# If the directory you are in has files, tell us how many there are.
 	files
 	if [ $GetAmountOfFiles > 0 ]; then
 		PS1+=$connector
@@ -95,7 +99,7 @@ set_prompt () {
 		PS1+=$txtrst$mainColor$ender
 	fi
 
-	# If the directory you are in has more directories, tell us how many there are
+	# If the directory you are in has more directories, tell us how many there are.
 	dirs
 	if [ $GetAmountOfDirs > 0 ]; then
 		PS1+=$connector
@@ -103,7 +107,8 @@ set_prompt () {
 		PS1+=' directories'
 		PS1+=$txtrst$mainColor$ender
 	fi
-	
+
+	# End it all with a fancy arrow.
 	PS1+="\n$mainColor└►$txtrst "
 }
 
@@ -114,3 +119,5 @@ files () {
 dirs () {
 	GetAmountOfDirs=$(find . -maxdepth 1 -type d | wc -w)
 }
+
+PROMPT_COMMAND='set_prompt'
