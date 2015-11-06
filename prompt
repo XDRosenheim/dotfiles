@@ -1,123 +1,125 @@
 #!/bin/bash
 # ^ I know this doesn't HAS TO be here,
 # but then nano will colourize it.
+# And I like that.
+# My script, not your's.
 
 set_prompt () {
-	local last_command=$?  # Must come first!
-	# Clear it..
-	PS1=""
+local last_command=$?  # Must come first!
+# Clear it..
+PS1=""
 ##### Colors ###############################
 ##### Regular
-	local txtblk='\[\e[0;30m\]' # Black
-	local txtred='\[\e[0;31m\]' # Red
-	local txtgrn='\[\e[0;32m\]' # Green
-	local txtylw='\[\e[0;33m\]' # Yellow
-	local txtblu='\[\e[0;34m\]' # Blue
-	local txtpur='\[\e[0;35m\]' # Purple
-	local txtcyn='\[\e[0;36m\]' # Cyan
-	local txtwht='\[\e[0;37m\]' # White
+  local txtblk='\[\e[0;30m\]' # Black
+  local txtred='\[\e[0;31m\]' # Red
+  local txtgrn='\[\e[0;32m\]' # Green
+  local txtylw='\[\e[0;33m\]' # Yellow
+  local txtblu='\[\e[0;34m\]' # Blue
+  local txtpur='\[\e[0;35m\]' # Purple
+  local txtcyn='\[\e[0;36m\]' # Cyan
+  local txtwht='\[\e[0;37m\]' # White
 ##### Bold
-	local bldblk='\[\e[1;30m\]' # Black
-	local bldred='\[\e[1;31m\]' # Red
-	local bldgrn='\[\e[1;32m\]' # Green
-	local bldylw='\[\e[1;33m\]' # Yellow
-	local bldblu='\[\e[1;34m\]' # Blue
-	local bldpur='\[\e[1;35m\]' # Purple
-	local bldcyn='\[\e[1;36m\]' # Cyan
-	local bldwht='\[\e[1;37m\]' # White
+  local bldblk='\[\e[1;30m\]' # Black
+  local bldred='\[\e[1;31m\]' # Red
+  local bldgrn='\[\e[1;32m\]' # Green
+  local bldylw='\[\e[1;33m\]' # Yellow
+  local bldblu='\[\e[1;34m\]' # Blue
+  local bldpur='\[\e[1;35m\]' # Purple
+  local bldcyn='\[\e[1;36m\]' # Cyan
+  local bldwht='\[\e[1;37m\]' # White
 ##### Underline
-	local unkblk='\[\e[4;30m\]' # Black
-	local undred='\[\e[4;31m\]' # Red
-	local undgrn='\[\e[4;32m\]' # Green
-	local undylw='\[\e[4;33m\]' # Yellow
-	local undblu='\[\e[4;34m\]' # Blue
-	local undpur='\[\e[4;35m\]' # Purple
-	local undcyn='\[\e[4;36m\]' # Cyan
-	local undwht='\[\e[4;37m\]' # White
+  local unkblk='\[\e[4;30m\]' # Black
+  local undred='\[\e[4;31m\]' # Red
+  local undgrn='\[\e[4;32m\]' # Green
+  local undylw='\[\e[4;33m\]' # Yellow
+  local undblu='\[\e[4;34m\]' # Blue
+  local undpur='\[\e[4;35m\]' # Purple
+  local undcyn='\[\e[4;36m\]' # Cyan
+  local undwht='\[\e[4;37m\]' # White
 ##### Background
-	local bakblk='\[\e[40m\]'   # Black
-	local bakred='\[\e[41m\]'   # Red
-	local bakgrn='\[\e[42m\]'   # Green
-	local bakylw='\[\e[43m\]'   # Yellow
-	local bakblu='\[\e[44m\]'   # Blue
-	local bakpur='\[\e[45m\]'   # Purple
-	local bakcyn='\[\e[46m\]'   # Cyan
-	local bakwht='\[\e[47m\]'   # White
+  local bakblk='\[\e[40m\]'   # Black
+  local bakred='\[\e[41m\]'   # Red
+  local bakgrn='\[\e[42m\]'   # Green
+  local bakylw='\[\e[43m\]'   # Yellow
+  local bakblu='\[\e[44m\]'   # Blue
+  local bakpur='\[\e[45m\]'   # Purple
+  local bakcyn='\[\e[46m\]'   # Cyan
+  local bakwht='\[\e[47m\]'   # White
 ##### Reset
-	local txtrst='\[\e[0m\]'    # Text Reset
+  local txtrst='\[\e[0m\]'    # Text Reset
 ##### Bold Underline
-	local bldundblu='\[\e[1;4;34m\]' # Blue
+  local bldundblu='\[\e[1;4;34m\]' # Blue
 ############################################
 ##### Stuff ### Change these ###############
-	local connector='─'				# Placed between ender and starter
-	local starter='┤'				# Placed before stuff
-	local ender='├'					# Placed after stuff
-	local errorsymbol=█				# Code for an errorsymbol #'\342\234\227' is a cross
-	local mainColor=$bldwht			# Main color is the color of the lines and parentheses
-	local dirColor=$bldundblu		# Color of current directory
-	local fileCountColor=$txtylw	# COlor of file counter
-	local dirCountColor=$txtylw		# Color of dir counter
+  local connector='─'          # Placed between ender and starter
+  local starter='┤'            # Placed before stuff
+  local ender='├'              # Placed after stuff
+  local errorsymbol=█          # Code for an errorsymbol #'\342\234\227' is a cross
+  local mainColor=$bldwht      # Main color is the color of the lines and parentheses
+  local dirColor=$bldundblu    # Color of current directory
+  local fileCountColor=$txtylw # COlor of file counter
+  local dirCountColor=$txtylw  # Color of dir counter
 ############################################
 
-	if [[ $last_command == 0 ]]; then
-		# Start with this.
-		PS1+="$mainColor┌$connector"
-	else
-		# Unless there was an error before.
-		PS1+="$mainColor┌$connector$starter$last_command$txtrst$ender$connector$starter$txtred$errorsymbol$mainColor$ender$connector"
-	fi
+  if [[ $last_command == 0 ]]; then
+    # Start with this.
+    PS1+="$mainColor┌$connector"
+  else
+    # Unless there was an error before.
+    PS1+="$mainColor┌$connector$starter$last_command$txtrst$ender$connector$starter$txtred$errorsymbol$mainColor$ender$connector"
+  fi
 
-	if [[ $EUID != 0 ]]; then
-		# Logged in as root.
-		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
-		PS1+=$connector
-		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
-	else
-		# Logged in as a user.
-		PS1+="$mainColor$starter$txtrst$undgrn\u$txtrst$mainColor$ender"
-		PS1+=$connector
-		PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
-		PS1+=$connector
-		PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
-	fi
+  if [[ $EUID != 0 ]]; then
+    # Logged in as root.
+    PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
+    PS1+=$connector
+    PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
+  else
+    # Logged in as a user.
+    PS1+="$mainColor$starter$txtrst$undgrn\u$txtrst$mainColor$ender"
+    PS1+=$connector
+    PS1+="$starter$txtrst$txtylw\h$txtrst$mainColor$ender"
+    PS1+=$connector
+    PS1+="$starter$txtrst$txtcyn$(date "+%H:%M %a %d %b")$mainColor$ender"
+  fi
 
-	# Show git branch.
-	# Comented by default. It's ugly.
-	#PS1+=$connector
-	#PS1+="$starter$txtrst$txtpur$(__git_ps1)$mainColor$ender"
+  # Show git branch.
+  # Comented by default. It's ugly.
+  #PS1+=$connector
+  #PS1+="$starter$txtrst$txtpur$(__git_ps1)$mainColor$ender"
 
-	# Show pwd.
-	PS1+=$connector
-	PS1+="$starter$bldundblu\w$txtrst$mainColor$ender"
+  # Show pwd.
+  PS1+=$connector
+  PS1+="$starter$bldundblu\w$txtrst$mainColor$ender"
 
-	# If the directory you are in has files, tell us how many there are.
-	files
-	if [ $GetAmountOfFiles > 0 ]; then
-		PS1+=$connector
-		PS1+=$starter$fileCountColor$GetAmountOfFiles
-		PS1+=' files'
-		PS1+=$txtrst$mainColor$ender
-	fi
+  # If the directory you are in has files, tell us how many there are.
+  files
+  if [[ $GetAmountOfFiles -gt 0 ]]; then
+    PS1+=$connector
+    PS1+=$starter$fileCountColor$GetAmountOfFiles
+    PS1+=' files'
+    PS1+=$txtrst$mainColor$ender
+  fi
 
-	# If the directory you are in has more directories, tell us how many there are.
-	dirs
-	if [ $GetAmountOfDirs > 0 ]; then
-		PS1+=$connector
-		PS1+=$starter$dirCountColor$GetAmountOfDirs
-		PS1+=' directories'
-		PS1+=$txtrst$mainColor$ender
-	fi
+  # If the directory you are in has more directories, tell us how many there are.
+  dirs
+  if [[ $GetAmountOfDirs -gt 0 ]]; then
+    PS1+=$connector
+    PS1+=$starter$dirCountColor$GetAmountOfDirs
+    PS1+=' directories'
+    PS1+=$txtrst$mainColor$ender
+  fi
 
-	# End it all with a fancy arrow.
-	PS1+="\n$mainColor└►$txtrst "
+  # End it all with a fancy arrow.
+  PS1+="\n$mainColor└►$txtrst "
 }
 
 files () {
-	GetAmountOfFiles=$(find . -maxdepth 1 -type f | wc -w)
+  GetAmountOfFiles=$(find . -maxdepth 1 -type f | wc -w)
 }
 
 dirs () {
-	GetAmountOfDirs=$(find . -maxdepth 1 -type d | wc -w)
+  GetAmountOfDirs=$(find . -maxdepth 1 -type d | wc -w)
 }
 
 PROMPT_COMMAND='set_prompt'
