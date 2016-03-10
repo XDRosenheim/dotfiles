@@ -21,3 +21,5 @@ alias maze8='while true; do (( RANDOM % 2 )) && echo -ne "\e[3$(( $RANDOM % 8 ))
 
 alias ll='ls -lA'
 alias l='ls -A'
+
+alias nnao='nano'

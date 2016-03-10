@@ -88,6 +88,10 @@ set_prompt () {
   PS1+=$connector
   PS1+=$starter$discusageColor$(df | grep "/dev/sda" | awk '{print $5}')$mainColor$ender
 
+  freeColor
+  PS1+=$connector
+  PS1+=$starter$freeColour$(free -h | grep "Mem:" | awk '{print $4}')$mainColor$ender
+
   # Show git branch.
   # Comented by default. It's ugly.
   #PS1+=$connector
@@ -133,12 +137,21 @@ discUsageColor () {
     discusageColor='\[\e[0;31m\]'
   elif [[ i -gt 50 ]]; then
     discusageColor='\[\e[0;33m\]'
-  elif [[ i -gt 25 ]]; then
-    discusageColor='\[\e[0;32m\]'
+  #elif [[ i -gt 25 ]]; then
+  #  discusageColor='\[\e[0;32m\]'
   else
-    discusageColor='\[\e[0;37m\]'
+    discusageColor='\[\e[0;32m\]'
   fi
 }
 
-PROMPT_COMMAND='set_prompt'
+freeColor () {
+  local s="$(free -h | grep 'Mem:' | awk '{print $4}' | tr -d '1234567890.')"
+  if [[ s -eq "G" ]]; then
+	freeColour='\[\e[0;32m\]'
+  else
+	freeColour='\[\e[0;31m\]'
+  fi
+}
 
+
+PROMPT_COMMAND='set_prompt'

@@ -1,15 +1,16 @@
+#!/bin/bash
 ###
 # CUTSOM SETTINGS
 ###
 
 # aliases file exists?
-if [ -f ~/Dotfiles/aliases ]; then
-	. ~/Dotfiles/aliases
+if [ -f ~/dotfiles/aliases ]; then
+	. ~/dotfiles/aliases
 fi
 
 # Fancy prompt
-if [ -f ~/Dotfiles/prompt ]; then
-	. ~/Dotfiles/prompt
+if [ -f ~/dotfiles/prompt ]; then
+	. ~/dotfiles/prompt
 fi
 
 # bash_completion
@@ -22,8 +23,8 @@ if ! shopt -oq posix; then
 fi
 
 # Git config
-if [ -f ~/Dotfiles/git ]; then
-	. ~/Dotfiles/git
+if [ -f ~/dotfiles/git ]; then
+	. ~/dotfiles/git
 fi
 
 # Git-completion
@@ -31,14 +32,21 @@ if [ -f ~/.git-completion.bash ]; then
 	. ~/.git-completion.bash
 fi
 
-if [ -f ~/Dotfiles/cowsayFortune ]; then
-	. ~/Dotfiles/cowsayFortune
+# Cowsay with Fortune
+if [ -f ~/dotfiles/cowsayFortune ]; then
+	. ~/dotfiles/cowsayFortune
 fi
 
-if [ -f ~/Dotfiles/functions ]; then
-    . ~/Dotfiles/functions
+if [ -f ~/dotfiles/functions ]; then
+    . ~/dotfiles/functions
 fi
 
-if [ -f ~/Dotfiles/manpages ]; then
-    . ~/Dotfiles/manpages
+# Colour to manpages
+if [ -f ~/dotfiles/manpages ]; then
+    . ~/dotfiles/manpages
+fi
+
+# Copy config files to appropiate directories
+if [ -f ~/dotfiles/manpages ]; then
+	. ~/dotfiles/setup
 fi
