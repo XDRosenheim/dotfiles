@@ -2,7 +2,6 @@
 # ^ I know this doesn't HAS TO be here,
 # but then nano will colourize it.
 # And I like that.
-# My script, not your's.
 
 set_prompt () {
   local last_command=$?  # Must come first!
@@ -47,8 +46,6 @@ set_prompt () {
   local bakwht='\[\e[47m\]'   # White
 ##### Reset
   local txtrst='\[\e[0m\]'    # Text Reset
-##### Bold Underline
-  local bldundblu='\[\e[1;4;34m\]' # Blue
 ############################################
 ##### Stuff ### Change these ###############
   local connector='─'          # Placed between ender and starter
@@ -88,6 +85,8 @@ set_prompt () {
   PS1+=$connector
   PS1+=$starter$discusageColor$(df | grep "/dev/sda" | awk '{print $5}')$mainColor$ender
 
+
+  # Free dedotated wam
   freeColor
   PS1+=$connector
   PS1+=$starter$freeColour$(free -h | grep "Mem:" | awk '{print $4}')$mainColor$ender
@@ -99,7 +98,7 @@ set_prompt () {
 
   # Show pwd.
   PS1+=$connector
-  PS1+="$starter$bldundblu\w$txtrst$mainColor$ender"
+  PS1+="$starter$txtpur\W$txtrst$mainColor$ender"
 
   # If the directory you are in has files, tell us how many there are.
   files
@@ -129,6 +128,7 @@ files () {
 
 dirs () {
   GetAmountOfDirs=$(find . -maxdepth 1 -type d | wc -w)
+  ((GetAmountOfDirs--))
 }
 
 discUsageColor () {
@@ -152,6 +152,5 @@ freeColor () {
 	freeColour='\[\e[0;31m\]'
   fi
 }
-
 
 PROMPT_COMMAND='set_prompt'

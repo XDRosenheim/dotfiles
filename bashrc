@@ -3,6 +3,9 @@
 # CUTSOM SETTINGS
 ###
 
+# Directory colors
+LS_COLORS=$LS_COLORS:'di=0;35' ; export LS_COLORS
+
 # aliases file exists?
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases
@@ -37,6 +40,7 @@ if [ -f ~/dotfiles/cowsayFortune ]; then
 	. ~/dotfiles/cowsayFortune
 fi
 
+# All my functions
 if [ -f ~/dotfiles/functions ]; then
     . ~/dotfiles/functions
 fi
@@ -46,7 +50,3 @@ if [ -f ~/dotfiles/manpages ]; then
     . ~/dotfiles/manpages
 fi
 
-# Copy config files to appropiate directories
-if [ -f ~/dotfiles/manpages ]; then
-	. ~/dotfiles/setup
-fi

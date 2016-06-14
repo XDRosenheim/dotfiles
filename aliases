@@ -23,3 +23,5 @@ alias ll='ls -lA'
 alias l='ls -A'
 
 alias nnao='nano'
+
+alias art='php artisan'
