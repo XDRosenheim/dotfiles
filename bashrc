@@ -6,6 +6,8 @@
 # Directory colors
 LS_COLORS=$LS_COLORS:'di=0;35' ; export LS_COLORS
 
+
+# Load these files if they exsits
 # aliases file exists?
 if [ -f ~/dotfiles/aliases ]; then
 	. ~/dotfiles/aliases

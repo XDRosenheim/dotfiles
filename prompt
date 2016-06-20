@@ -105,7 +105,11 @@ set_prompt () {
   if [[ $GetAmountOfFiles -gt 0 ]]; then
     PS1+=$connector
     PS1+=$starter$fileCountColor$GetAmountOfFiles
-    PS1+=' files'
+    if [[ $GetAmountOfFiles -eq 1 ]]; then
+      PS1+=' file'
+    else
+      PS1+=' files'
+    fi
     PS1+=$txtrst$mainColor$ender
   fi
 
@@ -114,7 +118,11 @@ set_prompt () {
   if [[ $GetAmountOfDirs -gt 0 ]]; then
     PS1+=$connector
     PS1+=$starter$dirCountColor$GetAmountOfDirs
-    PS1+=' directories'
+    if [[ $GetAmountOfDirs -eq 1 ]]; then
+      PS1+=' directory'
+    else
+      PS1+=' directories'
+    fi
     PS1+=$txtrst$mainColor$ender
   fi
 
@@ -147,9 +155,9 @@ discUsageColor () {
 freeColor () {
   local s="$(free -h | grep 'Mem:' | awk '{print $4}' | tr -d '1234567890.')"
   if [[ s -eq "G" ]]; then
-	freeColour='\[\e[0;32m\]'
+    freeColour='\[\e[0;32m\]'
   else
-	freeColour='\[\e[0;31m\]'
+    freeColour='\[\e[0;31m\]'
   fi
 }
 

@@ -1,7 +1,0 @@
-#!/bin/bash
-# By XDRosenheim
-
-# Move nano config to home folder.
-cp -u nanorc ~/.nanorc
-
-#
